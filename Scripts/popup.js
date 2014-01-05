@@ -52,8 +52,8 @@ function addNoteToView(id, text) {
 
 function addNotesToView() {
 
+	// bgPage.loadNotesFromDB();
 	notes = bgPage.getNotes();
-	console.log(notes);
 
 	for (var i = 0; i < notes.length; i++) {
 		addNoteToView(notes[i].id, notes[i].text);

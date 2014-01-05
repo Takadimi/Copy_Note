@@ -55,6 +55,9 @@ function addNoteToDB(note) {
 	var request = objectStore.add(note);
 
 	request.onsuccess = function(e) {
+		// TODO: Potentially a bad idea, and maybe 
+		//could be done more elegantly.
+		notes.splice(0, 0, note);
 		console.log("Note added");
 	};
 
