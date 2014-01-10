@@ -2,3 +2,41 @@ body {
 	width: 400px;
 	height: 400px;
 }
+
+#noteInput {
+	resize: none;
+	width: 385px;
+	height: 17px;
+	max-width: 385px;
+	max-height: 400px;
+	-webkit-transition: height .5s;
+}
+
+#noteInput:focus {
+	height: 150px;
+}
+
+p {
+	margin: 4px;
+}
+
+.tag {
+	padding-left: 4px;
+	font-size: 12px;
+}
+
+img {
+	position: absolute;
+	margin-top: 5px;
+	left: 380px;
+}
+
+li {
+	display: inline;
+	list-style-type: none;
+	font-size: 12px;
+}
+
+hr {
+	margin-top: 1px;
+}

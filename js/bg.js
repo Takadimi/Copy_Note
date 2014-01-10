@@ -40,9 +40,7 @@ function transError(e) {
 	console.log(e);
 };
 
-/************************************* 
-  Functions for adding notes to the DB
-**************************************/
+/*Functions for adding notes to the DB*/
 
 function addNoteToDB(note) {
 
@@ -55,8 +53,8 @@ function addNoteToDB(note) {
 	var request = objectStore.add(note);
 
 	request.onsuccess = function(e) {
-		// TODO: Potentially a bad idea, and maybe 
-		//could be done more elegantly.
+		// This is a bit of a hack to make sure the two notes
+		// arrays are synced up.
 		notes.splice(0, 0, note);
 		console.log("Note added");
 	};
@@ -94,9 +92,7 @@ function createNoteFromWebPage(info, tab) {
 
 };
 
-/**************************************** 
-  Functions for getting notes from the DB
-****************************************/
+/*Functions for getting notes from the DB*/
 
 function getNotes() {
 	return notes;
@@ -107,8 +103,6 @@ function setNotes(e) {
 	var cursor = e.target.result;
 
 	if (cursor) {
-
-		cursor.value.id = cursor.key;
 
 		notes.push(cursor.value);
 		console.log(cursor.value);
@@ -128,6 +122,15 @@ function loadNotesFromDB() {
 
 	var objectStore = transaction.objectStore('cnDBStore');
 	objectStore.openCursor(null, 'prev').onsuccess = setNotes;
+
+};
+
+function openLinkClickedInPopup(url) {
+
+	chrome.tabs.create({url: url}, function(tab) {
+		console.log("Opened new tab from popup ");
+		console.log(tab);
+	});
 
 };
 
