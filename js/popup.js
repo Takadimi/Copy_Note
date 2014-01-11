@@ -4,7 +4,8 @@ var bgPage = chrome.extension.getBackgroundPage();
 var notes;
 
 function onImageClicked(e) {
-
+	// TODO: Consider changing these to html buttons instead of images
+	// It might look better...
 	console.log(e);
 
 	if (e.target.id == 'expand') {
@@ -123,4 +124,8 @@ function addNotesToView() {
 
 }
 
-document.onload = addNotesToView();
+function init() {
+	addNotesToView();
+}
+
+document.onload = init();

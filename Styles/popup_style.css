@@ -16,6 +16,13 @@ body {
 	height: 150px;
 }
 
+#submitButton {
+	width: 54px;
+	height: 20px;
+	background-image: url('../Images/submitButton.png');
+	outline: none;
+}
+
 p {
 	margin: 4px;
 }
