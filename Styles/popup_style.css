@@ -1,3 +1,5 @@
+/*General*/
+
 body {
 	width: 400px;
 	height: 400px;
@@ -23,11 +25,22 @@ body {
 	outline: none;
 }
 
+hr {
+	margin-top: 1px;
+}
+
+#footer {
+	width: 400px;
+	height: 15px;
+}
+
+/*Everything regarding individual notes*/
+
 p {
 	margin: 4px;
 }
 
-.tag {
+.linkTag {
 	padding-left: 4px;
 	font-size: 12px;
 }
@@ -42,8 +55,4 @@ li {
 	display: inline;
 	list-style-type: none;
 	font-size: 12px;
-}
-
-hr {
-	margin-top: 1px;
 }

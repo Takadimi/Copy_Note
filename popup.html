@@ -5,12 +5,13 @@
 	<link rel="stylesheet" type="text/css" href="Styles/popup_style.css">
 </head>
 <body>
-	<textarea id="noteInput" placeholder="Create a new note here!"></textarea>
-	<input type="button" id="submitButton"></input>
-	<div id="parentDiv">
-		
+	<div id="noteInputContainer">
+		<textarea id="noteInput" placeholder="Create a new note here!"></textarea>
+		<input type="button" id="submitButton"></input>
 	</div>
-	<!-- Load scripts in after the DOM has loaded -->
+	<div id="parentDiv"></div>
+	<div id="footer"></div> 
+	<!-- Load scripts in after all elements have loaded -->
 	<script language="javascript" type="text/javascript" src="js/popup.js"></script>
 </body>
 </html>

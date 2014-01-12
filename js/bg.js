@@ -65,7 +65,7 @@ function addNoteToDB(note) {
 
 };
 
-// Creates a note from the text area in popup.html
+// Creates a note from the textarea in popup.html
 function createNoteFromPopup(text) {
 
 	var note = {
@@ -74,6 +74,7 @@ function createNoteFromPopup(text) {
 		url: ""
 	};
 
+	console.log(note);
 	addNoteToDB(note);
 
 };
@@ -84,7 +85,7 @@ function createNoteFromWebPage(info, tab) {
 	var note = {
 		text: info.selectionText,
 		id: "",
-		url: tab.url
+		url: info.pageUrl
 	};
 
 	console.log(note);
