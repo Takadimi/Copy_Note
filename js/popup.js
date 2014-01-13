@@ -127,14 +127,14 @@ function createNote(id, text, url, index) {
 		noteContainer.appendChild(noteText);
 		noteContainer.appendChild(tagSpan);
 		noteContainer.appendChild(sourceLinkLiContainer);
-		noteContainer.appendChild(createClearButton('Images/removeButton.png'));
+		noteContainer.appendChild(createClearButton());
 		noteContainer.appendChild(createTextManipButton('Images/addButton.png', 'expand'));
 	} else {
 		noteText = createNotePara(text, false);
 		noteContainer.appendChild(noteText);
 		noteContainer.appendChild(tagSpan);
 		noteContainer.appendChild(sourceLinkLiContainer);
-		noteContainer.appendChild(createClearButton('Images/removeButton.png'));
+		noteContainer.appendChild(createClearButton());
 	}
 
 	return noteContainer;
