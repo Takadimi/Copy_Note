@@ -3,19 +3,25 @@
 var bgPage = chrome.extension.getBackgroundPage();
 var notes;
 
+function onCreateNoteButtonClicked(e) {
+
+	var createNoteButton = document.getElementById('createNoteButton');
+	createNoteButton.style.display = "none";
+
+	var noteInputContainer = document.getElementById('noteInputContainer');
+	noteInputContainer.style.display = "block";
+}
+
 function onSubmitButtonClicked(e) {
 	
 	var noteTextArea = document.getElementById('noteInput');
 
 	bgPage.createNoteFromPopup(noteTextArea.value);
 	location.reload();
-	
+
 }
 
 function onImageClicked(e) {
-	// TODO: Consider changing these to html buttons instead of images
-	// It might look better...
-	console.log(e);
 
 	if (e.target.id == 'expand') {
 		e.target.parentElement.firstChild.innerText = notes[e.target.parentElement.id].text;
@@ -129,6 +135,7 @@ function addNotesToView() {
 }
 
 function init() {
+	document.getElementById('createNoteButton').addEventListener('click', onCreateNoteButtonClicked, false);
 	document.getElementById('submitButton').addEventListener('click', onSubmitButtonClicked, false);
 	addNotesToView();
 }

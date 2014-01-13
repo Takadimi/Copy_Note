@@ -5,17 +5,28 @@ body {
 	height: 400px;
 }
 
-#noteInput {
-	resize: none;
-	width: 385px;
-	height: 17px;
-	max-width: 385px;
-	max-height: 400px;
-	-webkit-transition: height .5s;
+#header {
+	border-bottom: 2px solid #000;
 }
 
-#noteInput:focus {
-	height: 150px;
+#createNoteButton {
+	width: 54px;
+	height: 20px;
+	background-image: url('../Images/createNoteButton.png');
+	outline: none;
+	display: block;
+	margin-left: 335px;
+}
+
+#noteInputContainer {
+	display: none;
+}
+
+#noteInput {
+	width: 385px;
+	height: 50px;
+	max-width: 385px;
+	max-height: 400px;
 }
 
 #submitButton {
@@ -23,10 +34,11 @@ body {
 	height: 20px;
 	background-image: url('../Images/submitButton.png');
 	outline: none;
+	margin-left: 335px;
 }
 
 hr {
-	margin-top: 1px;
+
 }
 
 #footer {
