@@ -17,11 +17,31 @@ function onSubmitButtonClicked(e) {
 	var noteTextArea = document.getElementById('noteInput');
 
 	bgPage.createNoteFromPopup(noteTextArea.value);
-	location.reload();
+	location.reload(false);
 
 }
 
-function onImageClicked(e) {
+function onClearButtonClicked(e) {
+
+	var parent = e.target.parentElement;
+	bgPage.removeNoteFromDB(parent.id, parent.attributes.index.value);
+	location.reload(false);
+
+}
+
+function createClearButton() {
+
+	var button = document.createElement('input');
+	button.setAttribute('type', 'button');
+	button.setAttribute('id', 'clearButton');
+
+	button.addEventListener('click', onClearButtonClicked, false);
+
+	return button;
+
+}
+
+function onTextManipButtonClicked(e) {
 
 	if (e.target.id == 'expand') {
 		e.target.parentElement.firstChild.innerText = notes[e.target.parentElement.id].text;
@@ -43,7 +63,7 @@ function createTextManipButton(src, type) {
 
 	console.log(image);
 
-	image.addEventListener('click', onImageClicked, false);
+	image.addEventListener('click', onTextManipButtonClicked, false);
 
 	return image;
 
@@ -85,10 +105,11 @@ function createNotePara(text, exceedsTextLimit) {
 
 }
 
-function createNote(id, text, url) {
+function createNote(id, text, url, index) {
 
 	var noteContainer = document.createElement('div');
 	noteContainer.setAttribute('id', id);
+	noteContainer.setAttribute('index', index);
 	noteContainer.setAttribute('class', 'noteContainer');
 
 	var tagSpan = document.createElement('span');
@@ -106,12 +127,14 @@ function createNote(id, text, url) {
 		noteContainer.appendChild(noteText);
 		noteContainer.appendChild(tagSpan);
 		noteContainer.appendChild(sourceLinkLiContainer);
+		noteContainer.appendChild(createClearButton('Images/removeButton.png'));
 		noteContainer.appendChild(createTextManipButton('Images/addButton.png', 'expand'));
 	} else {
 		noteText = createNotePara(text, false);
 		noteContainer.appendChild(noteText);
 		noteContainer.appendChild(tagSpan);
 		noteContainer.appendChild(sourceLinkLiContainer);
+		noteContainer.appendChild(createClearButton('Images/removeButton.png'));
 	}
 
 	return noteContainer;
@@ -125,9 +148,9 @@ function addNotesToView() {
 	var note;
 
 	for (var i = 0; i < notes.length; i++) {
-		notes[i].id = i;
-
-		note = createNote(notes[i].id, notes[i].text, notes[i].url);
+		notes[i].index = i;
+		console.log(notes[i]);
+		note = createNote(notes[i].id, notes[i].text, notes[i].url, notes[i].index);
 		parentDiv.appendChild(note);
 		parentDiv.appendChild(document.createElement('hr'));
 	}

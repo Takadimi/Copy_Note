@@ -68,3 +68,10 @@ li {
 	list-style-type: none;
 	font-size: 12px;
 }
+
+#clearButton {
+	width: 54px;
+	height: 20px;
+	background-image: url('../Images/clearButton.png');
+	outline: none;
+}

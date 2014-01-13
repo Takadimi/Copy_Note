@@ -9,7 +9,8 @@ var notes = new Array();
 // var note = {
 // 	text: "",
 // 	id: "",
-// 	url: ""
+// 	url: "",
+//  key: ""
 // };
 
 request.onsuccess = function(e) {
@@ -40,7 +41,7 @@ function transError(e) {
 	console.log(e);
 };
 
-/*Functions for adding notes to the DB*/
+/*Functions for adding/remove notes to the DB*/
 
 function addNoteToDB(note) {
 
@@ -65,13 +66,36 @@ function addNoteToDB(note) {
 
 };
 
+function removeNoteFromDB(id, index) {
+
+	var transaction = cnDB.transaction(['cnDBStore'], 'readwrite');
+
+	transaction.oncomplete = transComplete;
+	transaction.onerror = transError;
+
+	var objectStore = transaction.objectStore('cnDBStore');
+	var request = objectStore.delete(Number(id));
+
+	request.onsuccess = function(e) {
+		console.log("Note " + id + " removed");
+		// Same as the hack for adding notes, just in reverse
+		notes.splice(Number(index), 1);
+	}
+
+	request.onerror = function(e) {
+		console.log("Error removing note " + id);
+	}
+
+}
+
 // Creates a note from the textarea in popup.html
 function createNoteFromPopup(text) {
 
 	var note = {
 		text: text,
 		id: "",
-		url: ""
+		url: "",
+		index: ""
 	};
 
 	console.log(note);
@@ -85,7 +109,8 @@ function createNoteFromWebPage(info, tab) {
 	var note = {
 		text: info.selectionText,
 		id: "",
-		url: info.pageUrl
+		url: info.pageUrl,
+		index: ""
 	};
 
 	console.log(note);
@@ -105,8 +130,8 @@ function setNotes(e) {
 
 	if (cursor) {
 
+		cursor.value.id = cursor.key;
 		notes.push(cursor.value);
-		console.log(cursor.value);
 
 		cursor.continue();
 
@@ -134,8 +159,6 @@ function openLinkClickedInPopup(url) {
 	});
 
 };
-
-// TODO: Create a remove/delete note function
 
 chrome.contextMenus.create({id: 'cnID', title: 'Copy Note', contexts: ['selection']}, function() {
 	console.log("Context Menu successfully created");
