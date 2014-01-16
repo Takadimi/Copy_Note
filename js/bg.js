@@ -1,21 +1,20 @@
-// Background script to run persistently 
+// Background script to run persistently
 // while the browser is running.
 
 var cnDB;
 var request = indexedDB.open('cnDB', 1);
-var notes = new Array();
+var popupPage;
 
 /* TEMPLATE FOR NOTE OBJECTS */
 // var note = {
-// 	text: "",
-// 	id: "",
-// 	url: "",
-//  key: ""
+//  text: "",
+//  shortText: "",
+//  id: "",
+//  url: "",
 // };
 
 request.onsuccess = function(e) {
 	cnDB = request.result;
-	loadNotesFromDB();
 	console.log(cnDB);
 };
 
@@ -34,12 +33,12 @@ request.onupgradeneeded = function(e) {
 
 function transComplete(e) {
 	console.log("cnDB transaction complete");
-};
+}
 
 function transError(e) {
 	console.error("Error in cnDB transaction");
 	console.log(e);
-};
+}
 
 /*Functions for adding/remove notes to the DB*/
 
@@ -54,17 +53,15 @@ function addNoteToDB(note) {
 	var request = objectStore.add(note);
 
 	request.onsuccess = function(e) {
-		// This is a bit of a hack to make sure the two notes
-		// arrays are synced up.
-		notes.splice(0, 0, note);
 		console.log("Note added");
+		loadNotesFromDB();
 	};
 
 	request.onerror = function(e) {
 		console.log("Error adding note");
 	};
 
-};
+}
 
 function removeNoteFromDB(id, index) {
 
@@ -78,13 +75,20 @@ function removeNoteFromDB(id, index) {
 
 	request.onsuccess = function(e) {
 		console.log("Note " + id + " removed");
-		// Same as the hack for adding notes, just in reverse
-		notes.splice(Number(index), 1);
-	}
+		loadNotesFromDB();
+	};
 
 	request.onerror = function(e) {
 		console.log("Error removing note " + id);
-	}
+	};
+
+}
+
+function shortenText(fullText) {
+
+	var shortText = fullText.substr(0, 150) + "...";
+
+	return shortText;
 
 }
 
@@ -93,51 +97,55 @@ function createNoteFromPopup(text) {
 
 	var note = {
 		text: text,
-		id: "",
+		shortText: "",
 		url: "",
-		index: ""
+		timeStamp: new Date().getTime()
 	};
+
+	if (text.length > 150) {
+		shortText = shortenText(text);
+	}
 
 	console.log(note);
 	addNoteToDB(note);
 
-};
+}
 
 // Creates a note from right-clicking highlighted text
 function createNoteFromWebPage(info, tab) {
 
 	var note = {
 		text: info.selectionText,
-		id: "",
+		shortText: "",
 		url: info.pageUrl,
-		index: ""
+		timeStamp: new Date().getTime()
 	};
+
+	if (info.selectionText.length > 150) {
+		shortText = shortenText(text);
+	}
 
 	console.log(note);
 	addNoteToDB(note);
 
-};
+}
 
 /*Functions for getting notes from the DB*/
 
-function getNotes() {
-	return notes;
-};
-
-function setNotes(e) { 
+function setNotes(e) {
 
 	var cursor = e.target.result;
 
 	if (cursor) {
 
 		cursor.value.id = cursor.key;
-		notes.push(cursor.value);
+		popupPage.addNoteToView(cursor.value);
 
 		cursor.continue();
 
 	}
 
-};
+}
 
 function loadNotesFromDB() {
 
@@ -149,7 +157,7 @@ function loadNotesFromDB() {
 	var objectStore = transaction.objectStore('cnDBStore');
 	objectStore.openCursor(null, 'prev').onsuccess = setNotes;
 
-};
+}
 
 function openLinkClickedInPopup(url) {
 
@@ -158,7 +166,14 @@ function openLinkClickedInPopup(url) {
 		console.log(tab);
 	});
 
-};
+}
+
+function getPopupView() {
+
+	popupPage = chrome.extension.getViews({type: "popup"})[0];
+	console.log(popupPage);
+
+}
 
 chrome.contextMenus.create({id: 'cnID', title: 'Copy Note', contexts: ['selection']}, function() {
 	console.log("Context Menu successfully created");

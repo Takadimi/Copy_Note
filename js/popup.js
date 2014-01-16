@@ -10,22 +10,20 @@ function onCreateNoteButtonClicked(e) {
 
 	var noteInputContainer = document.getElementById('noteInputContainer');
 	noteInputContainer.style.display = "block";
+
 }
 
 function onSubmitButtonClicked(e) {
-	
-	var noteTextArea = document.getElementById('noteInput');
 
+	var noteTextArea = document.getElementById('noteInput');
 	bgPage.createNoteFromPopup(noteTextArea.value);
-	location.reload(false);
 
 }
 
 function onClearButtonClicked(e) {
 
 	var parent = e.target.parentElement;
-	bgPage.removeNoteFromDB(parent.id, parent.attributes.index.value);
-	location.reload(false);
+	bgPage.removeNoteFromDB(parent.id);
 
 }
 
@@ -105,17 +103,16 @@ function createNotePara(text, exceedsTextLimit) {
 
 }
 
-function createNote(id, text, url, index) {
+function createNote(id, text, url) {
 
 	var noteContainer = document.createElement('div');
 	noteContainer.setAttribute('id', id);
-	noteContainer.setAttribute('index', index);
 	noteContainer.setAttribute('class', 'noteContainer');
 
 	var tagSpan = document.createElement('span');
 	tagSpan.setAttribute('class', 'linkTag');
 	tagSpan.innerHTML = 'Source: ';
-	
+
 	var sourceLinkLiContainer = document.createElement('li');
 	var sourceLink = createSourceLink(url);
 	sourceLinkLiContainer.appendChild(sourceLink);
@@ -141,6 +138,16 @@ function createNote(id, text, url, index) {
 
 }
 
+function addNoteToView(note) {
+
+	var parentDiv = document.getElementById('parentDiv');
+	var currentNote = createNote(note.id, note.text, note.url);
+
+	parentDiv.appendChild(currentNote);
+	parentDiv.appendChild(document.createElement('hr'));
+
+}
+
 function addNotesToView() {
 
 	notes = bgPage.getNotes();
@@ -157,10 +164,19 @@ function addNotesToView() {
 
 }
 
+function refreshNotes() {
+
+	var parentDiv = document.getElementById('parentDiv');
+
+	parentDiv.innerHTML = "";
+
+}
+
 function init() {
 	document.getElementById('createNoteButton').addEventListener('click', onCreateNoteButtonClicked, false);
 	document.getElementById('submitButton').addEventListener('click', onSubmitButtonClicked, false);
-	addNotesToView();
+	bgPage.getPopupView();
+	bgPage.loadNotesFromDB();
 }
 
 document.onload = init();
