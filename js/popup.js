@@ -18,12 +18,18 @@ function onSubmitButtonClicked(e) {
 	var noteTextArea = document.getElementById('noteInput');
 	bgPage.createNoteFromPopup(noteTextArea.value);
 
+	noteTextArea.value = "";
+
 }
 
 function onClearButtonClicked(e) {
 
 	var parent = e.target.parentElement;
 	bgPage.removeNoteFromDB(parent.id);
+
+	removeNoteFromView(parent.id);
+
+	console.log("Clear button clicked");
 
 }
 
@@ -88,6 +94,15 @@ function createSourceLink(url) {
 
 }
 
+function removeNoteFromView(id) {
+
+	var parentDiv = document.getElementById('parentDiv');
+	var divToRemove = document.getElementById(id);
+
+	parentDiv.removeChild(divToRemove);
+
+}
+
 function createNotePara(text, exceedsTextLimit) {
 
 	var noteText = document.createElement('p');
@@ -144,7 +159,6 @@ function addNoteToView(note) {
 	var currentNote = createNote(note.id, note.text, note.url);
 
 	parentDiv.appendChild(currentNote);
-	parentDiv.appendChild(document.createElement('hr'));
 
 }
 
@@ -164,12 +178,18 @@ function addNotesToView() {
 
 }
 
-function refreshNotes() {
+function resetNotesView() {
 
 	var parentDiv = document.getElementById('parentDiv');
 
 	parentDiv.innerHTML = "";
 
+	console.log(parentDiv);
+
+}
+
+function popupPageInteract() {
+	console.log("Background page checking in");
 }
 
 function init() {

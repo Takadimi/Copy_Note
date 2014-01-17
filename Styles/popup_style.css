@@ -48,6 +48,11 @@ hr {
 
 /*Everything regarding individual notes*/
 
+.noteContainer {
+	padding-bottom: 1px;
+	border-bottom: solid 1px black;
+}
+
 p {
 	margin: 4px;
 }

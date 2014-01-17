@@ -2,7 +2,7 @@
 // while the browser is running.
 
 var cnDB;
-var request = indexedDB.open('cnDB', 1);
+var request = indexedDB.open('cnDB', 2);
 var popupPage;
 
 /* TEMPLATE FOR NOTE OBJECTS */
@@ -27,7 +27,11 @@ request.onupgradeneeded = function(e) {
 	var db = e.target.result;
 	console.log(db);
 
-	var objectStore = db.createObjectStore('cnDBStore', {autoIncrement: true});
+	if (db.objectStoreNames.contains('cnDBStore')) {
+		db.deleteObjectStore('cnDBStore');
+	}
+
+	var objectStore = db.createObjectStore('cnDBStore', {autoIncrement: true, keyPath: 'id'});
 
 };
 
@@ -42,7 +46,7 @@ function transError(e) {
 
 /*Functions for adding/remove notes to the DB*/
 
-function addNoteToDB(note) {
+function addNoteToDB(note, sourceOfNote) {
 
 	var transaction = cnDB.transaction(['cnDBStore'], 'readwrite');
 
@@ -54,7 +58,6 @@ function addNoteToDB(note) {
 
 	request.onsuccess = function(e) {
 		console.log("Note added");
-		loadNotesFromDB();
 	};
 
 	request.onerror = function(e) {
@@ -63,7 +66,7 @@ function addNoteToDB(note) {
 
 }
 
-function removeNoteFromDB(id, index) {
+function removeNoteFromDB(id) {
 
 	var transaction = cnDB.transaction(['cnDBStore'], 'readwrite');
 
@@ -75,7 +78,6 @@ function removeNoteFromDB(id, index) {
 
 	request.onsuccess = function(e) {
 		console.log("Note " + id + " removed");
-		loadNotesFromDB();
 	};
 
 	request.onerror = function(e) {
@@ -99,7 +101,7 @@ function createNoteFromPopup(text) {
 		text: text,
 		shortText: "",
 		url: "",
-		timeStamp: new Date().getTime()
+		id: new Date().getTime()
 	};
 
 	if (text.length > 150) {
@@ -107,7 +109,8 @@ function createNoteFromPopup(text) {
 	}
 
 	console.log(note);
-	addNoteToDB(note);
+	addNoteToDB(note, 'popup');
+	popupPage.addNoteToView(note);
 
 }
 
@@ -118,7 +121,7 @@ function createNoteFromWebPage(info, tab) {
 		text: info.selectionText,
 		shortText: "",
 		url: info.pageUrl,
-		timeStamp: new Date().getTime()
+		id: new Date().getTime()
 	};
 
 	if (info.selectionText.length > 150) {
@@ -126,7 +129,7 @@ function createNoteFromWebPage(info, tab) {
 	}
 
 	console.log(note);
-	addNoteToDB(note);
+	addNoteToDB(note, 'webPage');
 
 }
 
@@ -138,7 +141,8 @@ function setNotes(e) {
 
 	if (cursor) {
 
-		cursor.value.id = cursor.key;
+		console.log(cursor.value);
+		// cursor.value.id = cursor.key;
 		popupPage.addNoteToView(cursor.value);
 
 		cursor.continue();
@@ -148,6 +152,8 @@ function setNotes(e) {
 }
 
 function loadNotesFromDB() {
+
+	popupPage.resetNotesView();
 
 	var transaction = cnDB.transaction(['cnDBStore'], 'readonly');
 
