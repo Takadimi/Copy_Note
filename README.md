@@ -1,4 +1,4 @@
 Copy_Note
 =========
 
-Simple note-taking extension for the Chrome Web Browser
+Simple note-taking/web-page-text-copying extension for the Chrome Web Browser
