@@ -88,7 +88,7 @@ function removeNoteFromDB(id) {
 
 function shortenText(fullText) {
 
-	var shortText = fullText.substr(0, 150) + "...";
+	var shortText = fullText.substr(0, 50) + "...";
 
 	return shortText;
 
@@ -99,13 +99,13 @@ function createNoteFromPopup(text) {
 
 	var note = {
 		text: text,
-		shortText: "",
+		shortText: text,
 		url: "",
 		id: new Date().getTime()
 	};
 
-	if (text.length > 150) {
-		shortText = shortenText(text);
+	if (text.length > 50) {
+		note.shortText = shortenText(text);
 	}
 
 	console.log(note);
@@ -119,15 +119,16 @@ function createNoteFromWebPage(info, tab) {
 
 	var note = {
 		text: info.selectionText,
-		shortText: "",
+		shortText: info.selectionText,
 		url: info.pageUrl,
 		id: new Date().getTime()
 	};
 
-	if (info.selectionText.length > 150) {
-		shortText = shortenText(text);
+	if (info.selectionText.length > 50) {
+		note.shortText = shortenText(info.selectionText);
 	}
 
+	console.log(note.shortText);
 	console.log(note);
 	addNoteToDB(note, 'webPage');
 

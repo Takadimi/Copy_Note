@@ -103,22 +103,26 @@ function removeNoteFromView(id) {
 
 }
 
-function createNotePara(text, exceedsTextLimit) {
+function createNotePara(text, noteTextClass) {
 
 	var noteText = document.createElement('p');
-	noteText.setAttribute('class', 'note');
+	noteText.setAttribute('class', noteTextClass);
 
-	if (exceedsTextLimit) {
-		noteText.appendChild(document.createTextNode(text.substr(0, 150) + "..."));
-	} else {
-		noteText.appendChild(document.createTextNode(text));
-	}
+	noteText.appendChild(document.createTextNode(text));
+
+	// if (exceedsTextLimit) {
+	// 	noteText.appendChild(document.createTextNode(text.substr(0, 150) + "..."));
+	// } else {
+	// 	noteText.appendChild(document.createTextNode(text));
+	// }
 
 	return noteText;
 
 }
 
-function createNote(id, text, url) {
+function createNote(id, text, shortText, url) {
+
+	console.log(shortText);
 
 	var noteContainer = document.createElement('div');
 	noteContainer.setAttribute('id', id);
@@ -132,22 +136,22 @@ function createNote(id, text, url) {
 	var sourceLink = createSourceLink(url);
 	sourceLinkLiContainer.appendChild(sourceLink);
 
-	var noteText;
+	var noteFull;
+	var noteShort;
 
-	if (text.length > 153) {
-		noteText = createNotePara(text, true);
-		noteContainer.appendChild(noteText);
+	noteFull = createNotePara(text, 'noteFull');
+	noteFull.setAttribute('hidden');
+	noteContainer.appendChild(noteFull);
+
+	noteShort = createNotePara(shortText, 'noteShort');
+	noteContainer.appendChild(noteShort);
+
+	if (url !== "") {
 		noteContainer.appendChild(tagSpan);
 		noteContainer.appendChild(sourceLinkLiContainer);
-		noteContainer.appendChild(createClearButton());
-		noteContainer.appendChild(createTextManipButton('Images/addButton.png', 'expand'));
-	} else {
-		noteText = createNotePara(text, false);
-		noteContainer.appendChild(noteText);
-		noteContainer.appendChild(tagSpan);
-		noteContainer.appendChild(sourceLinkLiContainer);
-		noteContainer.appendChild(createClearButton());
 	}
+
+	noteContainer.appendChild(createClearButton());
 
 	return noteContainer;
 
@@ -156,7 +160,7 @@ function createNote(id, text, url) {
 function addNoteToView(note) {
 
 	var parentDiv = document.getElementById('parentDiv');
-	var currentNote = createNote(note.id, note.text, note.url);
+	var currentNote = createNote(note.id, note.text, note.shortText, note.url);
 
 	parentDiv.appendChild(currentNote);
 

@@ -1,11 +1,12 @@
 /*General*/
 
 body {
-	width: 400px;
+	width: 391px;
 	height: 400px;
 }
 
 #header {
+	padding-bottom: 2px;
 	border-bottom: 2px solid #000;
 }
 
@@ -26,15 +27,21 @@ body {
 	width: 385px;
 	height: 50px;
 	max-width: 385px;
-	max-height: 400px;
+	max-height: 355px;
 }
 
 #submitButton {
-	width: 54px;
-	height: 20px;
-	background-image: url('../Images/submitButton.png');
-	outline: none;
+	position: relative;
+	background-color: #DDC2B2;
+	color: #B87333;
+	outline-color: #FFFFF0;
+	border: 3px solid #FFFFF0;
+	-webkit-border-radius: 3px;
 	margin-left: 335px;
+}
+
+#submitButton:active {
+	top: 1px;
 }
 
 hr {
@@ -78,5 +85,4 @@ li {
 	width: 54px;
 	height: 20px;
 	background-image: url('../Images/clearButton.png');
-	outline: none;
 }
