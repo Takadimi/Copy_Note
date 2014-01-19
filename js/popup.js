@@ -35,41 +35,46 @@ function onClearButtonClicked(e) {
 
 function createClearButton() {
 
-	var button = document.createElement('input');
-	button.setAttribute('type', 'button');
-	button.setAttribute('id', 'clearButton');
+	var clearButton = document.createElement('i');
+	clearButton.setAttribute('class', 'fa fa-trash-o');
+	clearButton.setAttribute('id', 'clearButton');
 
-	button.addEventListener('click', onClearButtonClicked, false);
+	clearButton.addEventListener('click', onClearButtonClicked, false);
 
-	return button;
+	return clearButton;
 
 }
 
 function onTextManipButtonClicked(e) {
 
-	if (e.target.id == 'expand') {
-		e.target.parentElement.firstChild.innerText = notes[e.target.parentElement.id].text;
-		e.target.src = 'Images/minusButton.png';
-		e.target.id = 'subtract';
-	} else if (e.target.id == 'subtract') {
-		e.target.parentElement.firstChild.innerText = notes[e.target.parentElement.id].text.substr(0, 150) + "...";
-		e.target.src = 'Images/addButton.png';
-		e.target.id = 'expand';
+	console.log(e);
+
+	if (e.target.id == 'more') {
+		e.target.parentElement.children[0].style.display = "block";
+		e.target.parentElement.children[1].style.display = "none";
+		e.target.className = 'fa fa-chevron-up';
+		e.target.id = 'less';
+	} else if (e.target.id == 'less') {
+		e.target.parentElement.children[1].style.display = "block";
+		e.target.parentElement.children[0].style.display = "none";
+		e.target.className = 'fa fa-chevron-down';
+		e.target.id = 'more';
 	}
 
 }
 
-function createTextManipButton(src, type) {
+function createTextManipButton(buttonClass, type) {
 
-	var image = document.createElement('img');
-	image.setAttribute('src', src);
-	image.setAttribute('id', type);
+	var manipBtn = document.createElement('i');
+	manipBtn.setAttribute('class', buttonClass);
+	manipBtn.setAttribute('id', type);
+	manipBtn.style.color = "#DDC2B2";
 
-	console.log(image);
+	console.log(manipBtn);
 
-	image.addEventListener('click', onTextManipButtonClicked, false);
+	manipBtn.addEventListener('click', onTextManipButtonClicked, false);
 
-	return image;
+	return manipBtn;
 
 }
 
@@ -110,12 +115,6 @@ function createNotePara(text, noteTextClass) {
 
 	noteText.appendChild(document.createTextNode(text));
 
-	// if (exceedsTextLimit) {
-	// 	noteText.appendChild(document.createTextNode(text.substr(0, 150) + "..."));
-	// } else {
-	// 	noteText.appendChild(document.createTextNode(text));
-	// }
-
 	return noteText;
 
 }
@@ -140,10 +139,11 @@ function createNote(id, text, shortText, url) {
 	var noteShort;
 
 	noteFull = createNotePara(text, 'noteFull');
-	noteFull.setAttribute('hidden');
+	noteFull.style.display = "none";
 	noteContainer.appendChild(noteFull);
 
 	noteShort = createNotePara(shortText, 'noteShort');
+	noteShort.style.display = "block";
 	noteContainer.appendChild(noteShort);
 
 	if (url !== "") {
@@ -152,6 +152,7 @@ function createNote(id, text, shortText, url) {
 	}
 
 	noteContainer.appendChild(createClearButton());
+	noteContainer.appendChild(createTextManipButton('fa fa-chevron-down', 'more'))
 
 	return noteContainer;
 

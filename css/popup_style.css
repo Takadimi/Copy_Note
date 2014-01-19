@@ -1,7 +1,7 @@
 /*General*/
 
 body {
-	width: 391px;
+	width: 425px;
 	height: 400px;
 }
 
@@ -16,7 +16,7 @@ body {
 	background-image: url('../Images/createNoteButton.png');
 	outline: none;
 	display: block;
-	margin-left: 335px;
+	margin-left: 355px;
 }
 
 #noteInputContainer {
@@ -24,9 +24,9 @@ body {
 }
 
 #noteInput {
-	width: 385px;
+	width: 417px;
 	height: 50px;
-	max-width: 385px;
+	max-width: 417px;
 	max-height: 355px;
 }
 
@@ -37,7 +37,7 @@ body {
 	outline-color: #FFFFF0;
 	border: 3px solid #FFFFF0;
 	-webkit-border-radius: 3px;
-	margin-left: 335px;
+	margin-left: 355px;
 }
 
 #submitButton:active {
@@ -79,10 +79,4 @@ li {
 	display: inline;
 	list-style-type: none;
 	font-size: 12px;
-}
-
-#clearButton {
-	width: 54px;
-	height: 20px;
-	background-image: url('../Images/clearButton.png');
 }
