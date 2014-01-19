@@ -78,6 +78,21 @@ function createTextManipButton(buttonClass, type) {
 
 }
 
+function onEditButtonClicked(e) {
+	console.log("Edit button clicked");
+}
+
+function createEditButton(buttonClass) {
+
+	var editBtn = document.createElement('i');
+	editBtn.setAttribute('class', buttonClass);
+
+	editBtn.addEventListener('click', onEditButtonClicked, false);
+
+	return editBtn;
+
+}
+
 function onLinkClicked(e) {
 	bgPage.openLinkClickedInPopup(e.target.href);
 }
@@ -121,8 +136,6 @@ function createNotePara(text, noteTextClass) {
 
 function createNote(id, text, shortText, url) {
 
-	console.log(shortText);
-
 	var noteContainer = document.createElement('div');
 	noteContainer.setAttribute('id', id);
 	noteContainer.setAttribute('class', 'noteContainer');
@@ -146,13 +159,14 @@ function createNote(id, text, shortText, url) {
 	noteShort.style.display = "block";
 	noteContainer.appendChild(noteShort);
 
+	noteContainer.appendChild(createClearButton());
+	noteContainer.appendChild(createEditButton('fa fa-pencil-square-o', 'editButton'));
+	noteContainer.appendChild(createTextManipButton('fa fa-chevron-down', 'more'))
+
 	if (url !== "") {
 		noteContainer.appendChild(tagSpan);
 		noteContainer.appendChild(sourceLinkLiContainer);
 	}
-
-	noteContainer.appendChild(createClearButton());
-	noteContainer.appendChild(createTextManipButton('fa fa-chevron-down', 'more'))
 
 	return noteContainer;
 
@@ -189,12 +203,6 @@ function resetNotesView() {
 
 	parentDiv.innerHTML = "";
 
-	console.log(parentDiv);
-
-}
-
-function popupPageInteract() {
-	console.log("Background page checking in");
 }
 
 function init() {

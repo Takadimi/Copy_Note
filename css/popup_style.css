@@ -60,13 +60,28 @@ hr {
 	border-bottom: solid 1px black;
 }
 
+.noteOptions {
+	position: relative;
+	margin-left: 250px;
+}
+
+.fa {
+	position: relative;
+	padding-right: 3px;
+}
+
+.fa:active {
+	top: 2px;
+}
+
 p {
 	margin: 4px;
 }
 
 .linkTag {
-	padding-left: 4px;
-	font-size: 12px;
+	padding-left: 220px;
+	padding-right: 1px;
+	font-size: 10px;
 }
 
 img {
@@ -77,6 +92,7 @@ img {
 
 li {
 	display: inline;
+	padding-right: 3px;
 	list-style-type: none;
-	font-size: 12px;
+	font-size: 9px;
 }
