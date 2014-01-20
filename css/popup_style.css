@@ -3,11 +3,22 @@
 body {
 	width: 425px;
 	height: 400px;
+	background-color: #FFF4E0;
+	color: #D6A384;
+	font-family: 'Rokkitt', serif;
 }
 
 #header {
 	padding-bottom: 2px;
-	border-bottom: 2px solid #000;
+	border-bottom: 2px solid;
+}
+
+#header h3 {
+	display: inline;
+	margin: 3px;
+	-webkit-margin-before: 0em;
+	-webkit-margin-after: 0em;
+	color:#361E12;
 }
 
 #createNoteButton {
@@ -15,8 +26,8 @@ body {
 	height: 20px;
 	background-image: url('../Images/createNoteButton.png');
 	outline: none;
-	display: block;
-	margin-left: 355px;
+	display: inline;
+	margin-left: 369px;
 }
 
 #noteInputContainer {
@@ -28,6 +39,7 @@ body {
 	height: 50px;
 	max-width: 417px;
 	max-height: 355px;
+	outline-color: #FFFFF0;
 }
 
 #submitButton {
@@ -35,9 +47,8 @@ body {
 	background-color: #DDC2B2;
 	color: #B87333;
 	outline-color: #FFFFF0;
-	border: 3px solid #FFFFF0;
 	-webkit-border-radius: 3px;
-	margin-left: 355px;
+	margin-left: 369px;
 }
 
 #submitButton:active {
@@ -57,7 +68,7 @@ hr {
 
 .noteContainer {
 	padding-bottom: 1px;
-	border-bottom: solid 1px black;
+	border-bottom: solid 1px;
 }
 
 .noteOptions {
@@ -75,6 +86,7 @@ hr {
 }
 
 p {
+	color:#361E12;
 	margin: 4px;
 }
 
@@ -82,6 +94,10 @@ p {
 	padding-left: 220px;
 	padding-right: 1px;
 	font-size: 10px;
+}
+
+a {
+	outline-color: #FFFFF0;
 }
 
 img {

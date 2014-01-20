@@ -68,7 +68,6 @@ function createTextManipButton(buttonClass, type) {
 	var manipBtn = document.createElement('i');
 	manipBtn.setAttribute('class', buttonClass);
 	manipBtn.setAttribute('id', type);
-	manipBtn.style.color = "#DDC2B2";
 
 	console.log(manipBtn);
 
