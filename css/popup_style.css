@@ -22,12 +22,17 @@ body {
 }
 
 #createNoteButton {
-	width: 54px;
-	height: 20px;
-	background-image: url('../Images/createNoteButton.png');
-	outline: none;
+	position: relative;
 	display: inline;
+	background-color: #DDC2B2;
+	color: #B87333;
+	outline-color: #FFFFF0;
+	-webkit-border-radius: 3px;
 	margin-left: 369px;
+}
+
+#createNoteButton:active {
+	top: 1px;
 }
 
 #noteInputContainer {
@@ -78,7 +83,7 @@ hr {
 
 .fa {
 	position: relative;
-	padding-right: 3px;
+	padding-right: 4px;
 }
 
 .fa:active {
