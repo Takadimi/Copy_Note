@@ -29,8 +29,6 @@ function onClearButtonClicked(e) {
 
 	removeNoteFromView(parent.id);
 
-	console.log("Clear button clicked");
-
 }
 
 function createClearButton() {
@@ -46,8 +44,6 @@ function createClearButton() {
 }
 
 function onTextManipButtonClicked(e) {
-
-	console.log(e);
 
 	if (e.target.id == 'more') {
 		e.target.parentElement.children[0].style.display = "block";
@@ -68,8 +64,6 @@ function createTextManipButton(buttonClass, type) {
 	var manipBtn = document.createElement('i');
 	manipBtn.setAttribute('class', buttonClass);
 	manipBtn.setAttribute('id', type);
-
-	console.log(manipBtn);
 
 	manipBtn.addEventListener('click', onTextManipButtonClicked, false);
 
