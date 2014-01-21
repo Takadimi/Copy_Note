@@ -1,7 +1,6 @@
 // Allows for access to BG script
 // Keeps DB transactions in one place
 var bgPage = chrome.extension.getBackgroundPage();
-var notes;
 
 function onCreateNoteButtonClicked(e) {
 
@@ -171,22 +170,6 @@ function addNoteToView(note) {
 	var currentNote = createNote(note.id, note.text, note.shortText, note.url);
 
 	parentDiv.appendChild(currentNote);
-
-}
-
-function addNotesToView() {
-
-	notes = bgPage.getNotes();
-	var parentDiv = document.getElementById('parentDiv');
-	var note;
-
-	for (var i = 0; i < notes.length; i++) {
-		notes[i].index = i;
-		console.log(notes[i]);
-		note = createNote(notes[i].id, notes[i].text, notes[i].url, notes[i].index);
-		parentDiv.appendChild(note);
-		parentDiv.appendChild(document.createElement('hr'));
-	}
 
 }
 
