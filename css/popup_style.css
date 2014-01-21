@@ -3,7 +3,7 @@
 body {
 	width: 425px;
 	height: 400px;
-	background-color: #FFF4E0;
+	background-color: #FDF6E3;
 	color: #D6A384;
 	font-family: 'Rokkitt', serif;
 }
@@ -44,6 +44,7 @@ body {
 	height: 50px;
 	max-width: 417px;
 	max-height: 355px;
+	background-color: #FFFCF2;
 	outline-color: #FFFFF0;
 }
 

@@ -86,9 +86,47 @@ function removeNoteFromDB(id) {
 
 }
 
+function updateNoteInDB(id, updatedText) {
+
+	var transaction = cnDB.transaction(['cnDBStore'], 'readwrite');
+
+	transaction.oncomplete = transComplete;
+	transaction.onerror = transError;
+
+	var objectStore = transaction.objectStore('cnDBStore');
+	var request = objectStore.get(Number(id));
+
+	request.onerror = function(e) {
+		console.log("Error retrieving note" + id);
+	};
+
+	request.onsuccess = function(e) {
+
+		var note = request.result;
+		note.fullText = updatedText;
+		note.shortText = updatedText;
+
+		if (updatedText.length > 70) {
+			note.shortText = shortenText(updatedText);
+		}
+
+		var requestUpdate = objectStore.put(note);
+
+		requestUpdate.onsuccess = function(e) {
+			console.log("Note updated");
+		};
+
+		requestUpdate.onerror = function(e) {
+			console.log("Error updating note");
+		};
+
+	};
+
+}
+
 function shortenText(fullText) {
 
-	var shortText = fullText.substr(0, 50) + "...";
+	var shortText = fullText.substr(0, 70) + "...";
 
 	return shortText;
 
@@ -104,7 +142,7 @@ function createNoteFromPopup(text) {
 		id: new Date().getTime()
 	};
 
-	if (text.length > 50) {
+	if (text.length > 70) {
 		note.shortText = shortenText(text);
 	}
 
@@ -124,7 +162,7 @@ function createNoteFromWebPage(info, tab) {
 		id: new Date().getTime()
 	};
 
-	if (info.selectionText.length > 50) {
+	if (info.selectionText.length > 70) {
 		note.shortText = shortenText(info.selectionText);
 	}
 
