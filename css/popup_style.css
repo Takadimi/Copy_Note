@@ -71,7 +71,9 @@ body {
 
 .noteContainer {
 	padding-bottom: 1px;
-	border-bottom: solid 1px;
+	border-bottom: solid 2px;
+	border-right: solid 2px;
+	-webkit-border-bottom-right-radius: 15px;
 }
 
 .noteOptions {
