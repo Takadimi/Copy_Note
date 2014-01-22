@@ -127,8 +127,9 @@ function changeHeaderView(state) {
 		document.getElementById('createNoteButton').style.display = "none";
 		document.getElementById('noteInputContainer').style.display = "none";
 		document.getElementById('noteEditContainer').style.display = "block";
+		document.getElementById('editInput').focus();
 
-	} else if (state === "none") {
+	} else if (state === "home") {
 
 	}
 
