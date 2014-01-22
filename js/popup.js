@@ -207,6 +207,8 @@ function addNoteToView(note) {
 
 	parentDiv.insertBefore(currentNote, parentDiv.firstChild);
 
+	formatNoteHTML(note.id);
+
 }
 
 function replaceNoteInView(note) {
@@ -214,7 +216,21 @@ function replaceNoteInView(note) {
 	var noteDiv = document.getElementById(note.id);
 
 	noteDiv.firstChild.innerText = note.text;
-	noteDiv.firstChild.nextSibling.innerHTML = note.shortText;
+	noteDiv.firstChild.nextSibling.innerText = note.shortText;
+
+	formatNoteHTML(note.id);
+
+}
+
+function formatNoteHTML(id) {
+
+	var noteDiv = document.getElementById(id);
+
+	noteDiv.firstChild.innerHTML = noteDiv.firstChild.innerHTML.replace(/\n/g, '<br/>');
+	noteDiv.firstChild.nextSibling.innerHTML = noteDiv.firstChild.nextSibling.innerHTML.replace(/\n/g, '<br/>');
+
+	noteDiv.firstChild.innerHTML = noteDiv.firstChild.innerHTML.replace(/\s\s+/g, '<br/><br/>');
+	noteDiv.firstChild.nextSibling.innerHTML = noteDiv.firstChild.nextSibling.innerHTML.replace(/\s\s+/g, '<br/><br/>');
 
 }
 
