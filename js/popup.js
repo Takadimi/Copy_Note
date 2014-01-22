@@ -78,6 +78,7 @@ function onEditButtonClicked(e) {
 	changeHeaderView('edit');
 
 	var noteTextArea = document.getElementById('editInput');
+	noteTextArea.value = e.target.parentElement.firstChild.innerText;
 	noteTextArea.setAttribute('data-noteid', e.target.parentElement.id);
 
 }
