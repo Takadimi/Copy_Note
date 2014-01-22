@@ -21,25 +21,16 @@ body {
 	color:#361E12;
 }
 
-#createNoteButton {
-	position: relative;
-	display: inline;
-	background-color: #DDC2B2;
-	color: #B87333;
-	outline-color: #FFFFF0;
-	-webkit-border-radius: 3px;
-	margin-left: 369px;
-}
-
-#createNoteButton:active {
-	top: 1px;
-}
 
 #noteInputContainer {
 	display: none;
 }
 
-#noteInput {
+#noteEditContainer {
+	display: none;
+}
+
+.headerInput {
 	width: 417px;
 	height: 50px;
 	max-width: 417px;
@@ -48,25 +39,28 @@ body {
 	outline-color: #FFFFF0;
 }
 
-#submitButton {
+.headerButtons {
 	position: relative;
 	background-color: #DDC2B2;
 	color: #B87333;
 	outline-color: #FFFFF0;
 	-webkit-border-radius: 3px;
+}
+
+.headerButtons:active {
+	top: 2px;
+}
+
+.editButtonsContainer {
+	margin-left: 319px;
+}
+
+#createNoteButton {
 	margin-left: 369px;
 }
 
-#submitButton:active {
-	top: 1px;
-}
-
-#noteEditContainer {
-	display: none;
-}
-
-hr {
-
+#submitButton {
+	margin-left: 369px;
 }
 
 #footer {

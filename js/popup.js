@@ -21,7 +21,7 @@ function onSubmitButtonClicked(e) {
 
 }
 
-function onEditButtonClicked(e) {
+function onSaveButtonClicked(e) {
 
 }
 
@@ -212,7 +212,7 @@ function resetNotesView() {
 function init() {
 	document.getElementById('createNoteButton').addEventListener('click', onCreateNoteButtonClicked, false);
 	document.getElementById('submitButton').addEventListener('click', onSubmitButtonClicked, false);
-	document.getElementById('saveEditButton').addEventListener('click', onEditButtonClicked, false);
+	document.getElementById('saveEditButton').addEventListener('click', onSaveButtonClicked, false);
 	document.getElementById('cancelEditButton').addEventListener('click', onCancelEditButtonClicked, false);
 	bgPage.getPopupView();
 	bgPage.loadNotesFromDB();

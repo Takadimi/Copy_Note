@@ -9,15 +9,17 @@
 <body>
 	<div id="header">
 		<h3>Copy Note</h3>
-		<input type="button" value="create"id="createNoteButton"></input>
+		<input type="button" value="create" class="headerButtons" id="createNoteButton"></input>
 		<div id="noteInputContainer">
-			<textarea id="noteInput" autofocus placeholder="Write a new note!"></textarea>
-			<input type="button" value="submit" id="submitButton"></input>
+			<textarea class="headerInput" id="noteInput" autofocus placeholder="Write a new note!"></textarea>
+			<input type="button" value="submit" class="headerButtons" id="submitButton"></input>
 		</div>
 		<div id="noteEditContainer">
-			<textarea id="editInput" autofocus></textarea>
-			<input type="button" value="save" id="saveEditButton"></input>
-			<input type="button" value="cancel" id="cancelEditButton"></input>
+			<textarea class="headerInput" id="editInput" autofocus></textarea>
+			<div class="editButtonsContainer">
+				<input type="button" value="cancel" class="headerButtons" id="cancelEditButton"></input>
+				<input type="button" value="save" class="headerButtons" id="saveEditButton"></input>
+			</div>
 		</div>
 	</div>
 	<div id="parentDiv"></div>
