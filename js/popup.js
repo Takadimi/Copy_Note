@@ -21,6 +21,14 @@ function onSubmitButtonClicked(e) {
 
 }
 
+function onEditButtonClicked(e) {
+
+}
+
+function onCancelEditButtonClicked(e) {
+
+}
+
 function onClearButtonClicked(e) {
 
 	var parent = e.target.parentElement;
@@ -71,7 +79,9 @@ function createTextManipButton(buttonClass, type) {
 }
 
 function onEditButtonClicked(e) {
-	console.log("Edit button clicked");
+
+	changeHeaderView('edit');
+
 }
 
 function createEditButton(buttonClass) {
@@ -103,6 +113,24 @@ function createSourceLink(url) {
 	link.addEventListener('click', onLinkClicked, false);
 
 	return link;
+
+}
+
+function changeHeaderView(state) {
+
+	var header = document.getElementById('header');
+
+	if (state === "submit") {
+
+	} else if (state === "edit") {
+
+		document.getElementById('createNoteButton').style.display = "none";
+		document.getElementById('noteInputContainer').style.display = "none";
+		document.getElementById('noteEditContainer').style.display = "block";
+
+	} else if (state === "none") {
+
+	}
 
 }
 
@@ -184,6 +212,8 @@ function resetNotesView() {
 function init() {
 	document.getElementById('createNoteButton').addEventListener('click', onCreateNoteButtonClicked, false);
 	document.getElementById('submitButton').addEventListener('click', onSubmitButtonClicked, false);
+	document.getElementById('saveEditButton').addEventListener('click', onEditButtonClicked, false);
+	document.getElementById('cancelEditButton').addEventListener('click', onCancelEditButtonClicked, false);
 	bgPage.getPopupView();
 	bgPage.loadNotesFromDB();
 }
