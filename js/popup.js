@@ -26,7 +26,7 @@ function onSaveButtonClicked(e) {
 }
 
 function onCancelEditButtonClicked(e) {
-
+	changeHeaderView('home');
 }
 
 function onClearButtonClicked(e) {
@@ -130,7 +130,9 @@ function changeHeaderView(state) {
 		document.getElementById('editInput').focus();
 
 	} else if (state === "home") {
-
+		document.getElementById('createNoteButton').style.display = "block";
+		document.getElementById('noteInputContainer').style.display = "none";
+		document.getElementById('noteEditContainer').style.display = "none";
 	}
 
 }
