@@ -39,6 +39,7 @@ function createClearButton() {
 	var clearButton = document.createElement('i');
 	clearButton.setAttribute('class', 'fa fa-trash-o');
 	clearButton.setAttribute('id', 'clearButton');
+	clearButton.setAttribute('title', 'Delete');
 
 	clearButton.addEventListener('click', onClearButtonClicked, false);
 
@@ -87,6 +88,7 @@ function createEditButton(buttonClass) {
 
 	var editBtn = document.createElement('i');
 	editBtn.setAttribute('class', buttonClass);
+	editBtn.setAttribute('title', 'Edit');
 
 	editBtn.addEventListener('click', onEditButtonClicked, false);
 

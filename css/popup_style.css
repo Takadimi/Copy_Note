@@ -38,6 +38,10 @@ body {
 	outline-color: #FFFFF0;
 }
 
+#editInput {
+	height: 175px;
+}
+
 .headerButtons {
 	position: relative;
 	background-color: #DDC2B2;
