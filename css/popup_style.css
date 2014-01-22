@@ -76,6 +76,10 @@ body {
 	-webkit-border-bottom-right-radius: 15px;
 }
 
+.noteContainer:hover {
+	background-color: rgba(245, 232, 198, 0.3);
+}
+
 .noteOptions {
 	position: relative;
 	margin-left: 250px;
