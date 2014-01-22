@@ -200,7 +200,7 @@ function loadNotesFromDB() {
 	transaction.onerror = transError;
 
 	var objectStore = transaction.objectStore('cnDBStore');
-	objectStore.openCursor(null, 'prev').onsuccess = setNotes;
+	objectStore.openCursor(null).onsuccess = setNotes;
 
 }
 

@@ -3,15 +3,7 @@
 var bgPage = chrome.extension.getBackgroundPage();
 
 function onCreateNoteButtonClicked(e) {
-
-	// var createNoteButton = document.getElementById('createNoteButton');
-	// createNoteButton.style.display = "none";
-
-	// var noteInputContainer = document.getElementById('noteInputContainer');
-	// noteInputContainer.style.display = "block";
-
 	changeHeaderView('submit');
-
 }
 
 function onSubmitButtonClicked(e) {
@@ -81,9 +73,7 @@ function createTextManipButton(buttonClass, type) {
 }
 
 function onEditButtonClicked(e) {
-
 	changeHeaderView('edit');
-
 }
 
 function createEditButton(buttonClass) {
@@ -206,7 +196,9 @@ function addNoteToView(note) {
 	var parentDiv = document.getElementById('parentDiv');
 	var currentNote = createNote(note.id, note.text, note.shortText, note.url);
 
-	parentDiv.appendChild(currentNote);
+	parentDiv.insertBefore(currentNote, parentDiv.firstChild);
+
+	// parentDiv.appendChild(currentNote);
 
 }
 
