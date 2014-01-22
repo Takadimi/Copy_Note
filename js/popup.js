@@ -4,11 +4,13 @@ var bgPage = chrome.extension.getBackgroundPage();
 
 function onCreateNoteButtonClicked(e) {
 
-	var createNoteButton = document.getElementById('createNoteButton');
-	createNoteButton.style.display = "none";
+	// var createNoteButton = document.getElementById('createNoteButton');
+	// createNoteButton.style.display = "none";
 
-	var noteInputContainer = document.getElementById('noteInputContainer');
-	noteInputContainer.style.display = "block";
+	// var noteInputContainer = document.getElementById('noteInputContainer');
+	// noteInputContainer.style.display = "block";
+
+	changeHeaderView('home');
 
 }
 
@@ -122,6 +124,9 @@ function changeHeaderView(state) {
 
 	if (state === "submit") {
 
+		document.getElementById('createNoteButton').style.display = "none";
+		document.getElementById('noteInputContainer').style.display = "block";
+
 	} else if (state === "edit") {
 
 		document.getElementById('createNoteButton').style.display = "none";
@@ -130,9 +135,10 @@ function changeHeaderView(state) {
 		document.getElementById('editInput').focus();
 
 	} else if (state === "home") {
-		document.getElementById('createNoteButton').style.display = "block";
-		document.getElementById('noteInputContainer').style.display = "none";
+		document.getElementById('createNoteButton').style.display = "none";
+		document.getElementById('noteInputContainer').style.display = "block";
 		document.getElementById('noteEditContainer').style.display = "none";
+		document.getElementById('noteInput').focus();
 	}
 
 }
