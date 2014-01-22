@@ -10,7 +10,7 @@ function onCreateNoteButtonClicked(e) {
 	// var noteInputContainer = document.getElementById('noteInputContainer');
 	// noteInputContainer.style.display = "block";
 
-	changeHeaderView('home');
+	changeHeaderView('submit');
 
 }
 
@@ -126,6 +126,7 @@ function changeHeaderView(state) {
 
 		document.getElementById('createNoteButton').style.display = "none";
 		document.getElementById('noteInputContainer').style.display = "block";
+		document.getElementById('noteInput').focus();
 
 	} else if (state === "edit") {
 
@@ -135,10 +136,9 @@ function changeHeaderView(state) {
 		document.getElementById('editInput').focus();
 
 	} else if (state === "home") {
-		document.getElementById('createNoteButton').style.display = "none";
-		document.getElementById('noteInputContainer').style.display = "block";
+		document.getElementById('createNoteButton').style.display = "block";
+		document.getElementById('noteInputContainer').style.display = "none";
 		document.getElementById('noteEditContainer').style.display = "none";
-		document.getElementById('noteInput').focus();
 	}
 
 }
