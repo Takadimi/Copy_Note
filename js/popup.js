@@ -10,6 +10,7 @@ function onSubmitButtonClicked(e) {
 
 	var noteTextArea = document.getElementById('noteInput');
 	bgPage.createNoteFromPopup(noteTextArea.value);
+	changeHeaderView('home');
 
 }
 
