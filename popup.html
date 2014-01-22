@@ -12,10 +12,13 @@
 		<input type="button" value="create" class="headerButtons" id="createNoteButton"></input>
 		<div id="noteInputContainer">
 			<textarea class="headerInput" id="noteInput" placeholder="Write a new note!"></textarea>
-			<input type="button" value="submit" class="headerButtons" id="submitButton"></input>
+			<div class="submitButtonsContainer">
+				<input type="button" value="cancel" class="headerButtons" id="cancelSubmitButton"></input>
+				<input type="button" value="submit" class="headerButtons" id="submitButton"></input>
+			</div>
 		</div>
 		<div id="noteEditContainer">
-			<textarea class="headerInput" id="editInput"></textarea>
+			<textarea class="headerInput" id="editInput" data-noteid=""></textarea>
 			<div class="editButtonsContainer">
 				<input type="button" value="cancel" class="headerButtons" id="cancelEditButton"></input>
 				<input type="button" value="save" class="headerButtons" id="saveEditButton"></input>

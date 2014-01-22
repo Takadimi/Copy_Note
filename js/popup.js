@@ -11,15 +11,17 @@ function onSubmitButtonClicked(e) {
 	var noteTextArea = document.getElementById('noteInput');
 	bgPage.createNoteFromPopup(noteTextArea.value);
 
-	noteTextArea.value = "";
-
 }
 
 function onSaveButtonClicked(e) {
 
+	var noteTextArea = document.getElementById('editInput');
+	bgPage.updateNoteInDB(noteTextArea.getAttribute('data-noteid'), noteTextArea.value);
+	changeHeaderView('home');
+
 }
 
-function onCancelEditButtonClicked(e) {
+function onCancelButtonClicked(e) {
 	changeHeaderView('home');
 }
 
@@ -74,6 +76,10 @@ function createTextManipButton(buttonClass, type) {
 
 function onEditButtonClicked(e) {
 	changeHeaderView('edit');
+
+	var noteTextArea = document.getElementById('editInput');
+	noteTextArea.setAttribute('data-noteid', e.target.parentElement.id);
+
 }
 
 function createEditButton(buttonClass) {
@@ -129,6 +135,8 @@ function changeHeaderView(state) {
 		document.getElementById('createNoteButton').style.display = "block";
 		document.getElementById('noteInputContainer').style.display = "none";
 		document.getElementById('noteEditContainer').style.display = "none";
+		document.getElementById('noteInput').value = "";
+		document.getElementById('editInput').value = "";
 	}
 
 }
@@ -198,14 +206,20 @@ function addNoteToView(note) {
 
 	parentDiv.insertBefore(currentNote, parentDiv.firstChild);
 
-	// parentDiv.appendChild(currentNote);
+}
+
+function replaceNoteInView(note) {
+
+	var noteDiv = document.getElementById(note.id);
+
+	noteDiv.firstChild.innerText = note.text;
+	noteDiv.firstChild.nextSibling.innerHTML = note.shortText;
 
 }
 
 function resetNotesView() {
 
 	var parentDiv = document.getElementById('parentDiv');
-
 	parentDiv.innerHTML = "";
 
 }
@@ -213,8 +227,9 @@ function resetNotesView() {
 function init() {
 	document.getElementById('createNoteButton').addEventListener('click', onCreateNoteButtonClicked, false);
 	document.getElementById('submitButton').addEventListener('click', onSubmitButtonClicked, false);
+	document.getElementById('cancelSubmitButton').addEventListener('click', onCancelButtonClicked, false);
 	document.getElementById('saveEditButton').addEventListener('click', onSaveButtonClicked, false);
-	document.getElementById('cancelEditButton').addEventListener('click', onCancelEditButtonClicked, false);
+	document.getElementById('cancelEditButton').addEventListener('click', onCancelButtonClicked, false);
 	bgPage.getPopupView();
 	bgPage.loadNotesFromDB();
 }

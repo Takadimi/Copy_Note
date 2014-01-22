@@ -50,15 +50,15 @@ body {
 	top: 2px;
 }
 
+.submitButtonsContainer {
+	margin-left: 308px;
+}
+
 .editButtonsContainer {
 	margin-left: 319px;
 }
 
 #createNoteButton {
-	margin-left: 369px;
-}
-
-#submitButton {
 	margin-left: 369px;
 }
 

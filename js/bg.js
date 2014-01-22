@@ -103,7 +103,7 @@ function updateNoteInDB(id, updatedText) {
 	request.onsuccess = function(e) {
 
 		var note = request.result;
-		note.fullText = updatedText;
+		note.text = updatedText;
 		note.shortText = updatedText;
 
 		if (updatedText.length > 70) {
@@ -114,6 +114,7 @@ function updateNoteInDB(id, updatedText) {
 
 		requestUpdate.onsuccess = function(e) {
 			console.log("Note updated");
+			popupPage.replaceNoteInView(note);
 		};
 
 		requestUpdate.onerror = function(e) {
