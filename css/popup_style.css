@@ -74,24 +74,27 @@ body {
 /*Everything regarding individual notes*/
 
 .noteContainer {
+	position: relative;
 	padding-bottom: 1px;
 	border-bottom: solid 2px;
 	border-right: solid 2px;
 	-webkit-border-bottom-right-radius: 15px;
+	-webkit-transition: background-color 0.3s;
 }
 
 .noteContainer:hover {
 	background-color: rgba(245, 232, 198, 0.3);
 }
 
-.noteOptions {
-	position: relative;
-	margin-left: 250px;
-}
-
 .fa {
 	position: relative;
 	padding-right: 4px;
+	opacity: 0.6;
+	-webkit-transition: opacity .5s;
+}
+
+.fa:hover {
+	opacity: 1;
 }
 
 .fa:active {
