@@ -8,7 +8,6 @@ var popupPage;
 /* TEMPLATE FOR NOTE OBJECTS */
 // var note = {
 //  text: "",
-//  shortText: "",
 //  id: "",
 //  url: "",
 // };
@@ -104,11 +103,6 @@ function updateNoteInDB(id, updatedText) {
 
 		var note = request.result;
 		note.text = updatedText;
-		note.shortText = updatedText;
-
-		if (updatedText.length > 70) {
-			note.shortText = shortenText(updatedText);
-		}
 
 		var requestUpdate = objectStore.put(note);
 
@@ -125,27 +119,14 @@ function updateNoteInDB(id, updatedText) {
 
 }
 
-function shortenText(fullText) {
-
-	var shortText = fullText.substr(0, 70) + "...";
-
-	return shortText;
-
-}
-
 // Creates a note from the textarea in popup.html
 function createNoteFromPopup(text) {
 
 	var note = {
 		text: text,
-		shortText: text,
 		url: "",
 		id: new Date().getTime()
 	};
-
-	if (text.length > 70) {
-		note.shortText = shortenText(text);
-	}
 
 	console.log(note);
 	addNoteToDB(note, 'popup');
@@ -158,17 +139,10 @@ function createNoteFromWebPage(info, tab) {
 
 	var note = {
 		text: info.selectionText,
-		shortText: info.selectionText,
 		url: info.pageUrl,
 		id: new Date().getTime()
 	};
 
-	if (info.selectionText.length > 70) {
-		note.shortText = shortenText(info.selectionText);
-	}
-
-	console.log(note.shortText);
-	console.log(note);
 	addNoteToDB(note, 'webPage');
 
 }
@@ -182,7 +156,6 @@ function setNotes(e) {
 	if (cursor) {
 
 		console.log(cursor.value);
-		// cursor.value.id = cursor.key;
 		popupPage.addNoteToView(cursor.value);
 
 		cursor.continue();

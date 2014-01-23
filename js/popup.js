@@ -50,14 +50,14 @@ function createClearButton() {
 
 function onTextManipButtonClicked(e) {
 
+	var noteText = e.target.parentElement.firstChild;
+
 	if (e.target.id == 'more') {
-		e.target.parentElement.children[0].style.display = "block";
-		e.target.parentElement.children[1].style.display = "none";
+		noteText.style.height = "100%";
 		e.target.className = 'fa fa-chevron-up';
 		e.target.id = 'less';
 	} else if (e.target.id == 'less') {
-		e.target.parentElement.children[1].style.display = "block";
-		e.target.parentElement.children[0].style.display = "none";
+		noteText.style.height = "33px";
 		e.target.className = 'fa fa-chevron-down';
 		e.target.id = 'more';
 	}
@@ -165,7 +165,7 @@ function createNotePara(text, noteTextClass) {
 
 }
 
-function createNote(id, text, shortText, url) {
+function createNote(id, text, url) {
 
 	var noteContainer = document.createElement('div');
 	noteContainer.setAttribute('id', id);
@@ -183,12 +183,8 @@ function createNote(id, text, shortText, url) {
 	var noteShort;
 
 	noteFull = createNotePara(text, 'noteFull');
-	noteFull.style.display = "none";
+	noteFull.style.display = "block";
 	noteContainer.appendChild(noteFull);
-
-	noteShort = createNotePara(shortText, 'noteShort');
-	noteShort.style.display = "block";
-	noteContainer.appendChild(noteShort);
 
 	noteContainer.appendChild(createClearButton());
 	noteContainer.appendChild(createEditButton('fa fa-pencil-square-o', 'editButton'));
@@ -206,7 +202,7 @@ function createNote(id, text, shortText, url) {
 function addNoteToView(note) {
 
 	var parentDiv = document.getElementById('parentDiv');
-	var currentNote = createNote(note.id, note.text, note.shortText, note.url);
+	var currentNote = createNote(note.id, note.text, note.url);
 
 	parentDiv.insertBefore(currentNote, parentDiv.firstChild);
 
@@ -219,7 +215,6 @@ function replaceNoteInView(note) {
 	var noteDiv = document.getElementById(note.id);
 
 	noteDiv.firstChild.innerText = note.text;
-	noteDiv.firstChild.nextSibling.innerText = note.shortText;
 
 	formatNoteHTML(note.id);
 

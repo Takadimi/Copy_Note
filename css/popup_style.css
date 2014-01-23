@@ -86,6 +86,11 @@ body {
 	background-color: rgba(245, 232, 198, 0.3);
 }
 
+.noteFull {
+	height: 33px;
+	overflow: hidden;
+}
+
 .fa {
 	position: relative;
 	padding-right: 4px;
