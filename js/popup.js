@@ -2,6 +2,7 @@
 // Keeps DB transactions in one place
 var bgPage = chrome.extension.getBackgroundPage();
 
+/*** EVENT HANDLERS FOR ALL CLICK ACTIONS ***/
 function onCreateNoteButtonClicked(e) {
 	changeHeaderView('submit');
 }
@@ -35,17 +36,8 @@ function onClearButtonClicked(e) {
 
 }
 
-function createClearButton() {
-
-	var clearButton = document.createElement('i');
-	clearButton.setAttribute('class', 'fa fa-trash-o');
-	clearButton.setAttribute('id', 'clearButton');
-	clearButton.setAttribute('title', 'Delete');
-
-	clearButton.addEventListener('click', onClearButtonClicked, false);
-
-	return clearButton;
-
+function onLinkClicked(e) {
+	bgPage.openLinkClickedInPopup(e.target.href);
 }
 
 function onTextManipButtonClicked(e) {
@@ -64,6 +56,30 @@ function onTextManipButtonClicked(e) {
 
 }
 
+function onEditButtonClicked(e) {
+	changeHeaderView('edit');
+
+	var noteTextArea = document.getElementById('editInput');
+	noteTextArea.value = e.target.parentElement.firstChild.innerText;
+	noteTextArea.setAttribute('data-noteid', e.target.parentElement.id);
+
+}
+
+/*** END OF EVENT HANDLERS FOR CLICK ACTIONS ***/
+
+function createClearButton() {
+
+	var clearButton = document.createElement('i');
+	clearButton.setAttribute('class', 'fa fa-trash-o');
+	clearButton.setAttribute('id', 'clearButton');
+	clearButton.setAttribute('title', 'Delete');
+
+	clearButton.addEventListener('click', onClearButtonClicked, false);
+
+	return clearButton;
+
+}
+
 function createTextManipButton(buttonClass, type) {
 
 	var manipBtn = document.createElement('i');
@@ -73,15 +89,6 @@ function createTextManipButton(buttonClass, type) {
 	manipBtn.addEventListener('click', onTextManipButtonClicked, false);
 
 	return manipBtn;
-
-}
-
-function onEditButtonClicked(e) {
-	changeHeaderView('edit');
-
-	var noteTextArea = document.getElementById('editInput');
-	noteTextArea.value = e.target.parentElement.firstChild.innerText;
-	noteTextArea.setAttribute('data-noteid', e.target.parentElement.id);
 
 }
 
@@ -95,10 +102,6 @@ function createEditButton(buttonClass) {
 
 	return editBtn;
 
-}
-
-function onLinkClicked(e) {
-	bgPage.openLinkClickedInPopup(e.target.href);
 }
 
 function createSourceLink(url) {
@@ -118,6 +121,7 @@ function createSourceLink(url) {
 
 }
 
+// Alters the display state of certain elements in the header
 function changeHeaderView(state) {
 
 	var header = document.getElementById('header');
@@ -210,6 +214,7 @@ function addNoteToView(note) {
 
 }
 
+// Takes an existing note div and updates it after it's been edited
 function replaceNoteInView(note) {
 
 	var noteDiv = document.getElementById(note.id);
@@ -220,6 +225,7 @@ function replaceNoteInView(note) {
 
 }
 
+// Replaces common string interpretations of new lines with break statements
 function formatNoteHTML(id) {
 
 	var noteDiv = document.getElementById(id);
@@ -231,7 +237,8 @@ function formatNoteHTML(id) {
 	noteDiv.firstChild.nextSibling.innerHTML = noteDiv.firstChild.nextSibling.innerHTML.replace(/\s\s+/g, '<br/><br/>');
 
 }
-
+// Cleans the div that holds all of the individual notes any time
+// there is a call to load the notes from the DB
 function resetNotesView() {
 
 	var parentDiv = document.getElementById('parentDiv');
