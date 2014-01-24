@@ -57,7 +57,7 @@ function onTextManipButtonClicked(e) {
 		e.target.className = 'fa fa-chevron-up';
 		e.target.id = 'less';
 	} else if (e.target.id == 'less') {
-		noteText.style.height = "33px";
+		noteText.style.height = "17px";
 		e.target.className = 'fa fa-chevron-down';
 		e.target.id = 'more';
 	}
