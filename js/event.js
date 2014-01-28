@@ -45,10 +45,12 @@ function onTextManipButtonClicked(e) {
 		noteText.style.height = "100%";
 		e.target.className = 'fa fa-chevron-up';
 		e.target.id = 'less';
+		e.target.parentElement.style.backgroundColor = "rgba(245, 232, 198, 0.3)";
 	} else if (e.target.id == 'less') {
 		noteText.style.height = "17px";
 		e.target.className = 'fa fa-chevron-down';
 		e.target.id = 'more';
+		e.target.parentElement.style.backgroundColor = "";
 	}
 
 }

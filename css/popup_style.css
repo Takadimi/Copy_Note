@@ -82,10 +82,6 @@ body {
 	-webkit-transition: background-color 0.3s;
 }
 
-.noteContainer:hover {
-	background-color: rgba(245, 232, 198, 0.3);
-}
-
 .noteFull {
 	height: 17px;
 	overflow: hidden;

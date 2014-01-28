@@ -127,7 +127,7 @@ function createNote(id, text, url) {
 
 	noteContainer.appendChild(createClearButton());
 	noteContainer.appendChild(createEditButton('fa fa-pencil-square-o', 'editButton'));
-	noteContainer.appendChild(createTextManipButton('fa fa-chevron-down', 'more'))
+	noteContainer.appendChild(createTextManipButton('fa fa-chevron-down', 'more'));
 
 	if (url !== "") {
 		noteContainer.appendChild(tagSpan);
